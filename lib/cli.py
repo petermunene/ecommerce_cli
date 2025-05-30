@@ -16,7 +16,9 @@ def customer_menu():
         print("7. Add Shipment")
         print("8. View Shipments by Customer ID")
         print("9. View All Shipments")
-        print("10. Back to Role Selection")
+        print("10. Delete Customer by ID")
+        print("11. Back to Role Selection")
+
         choice = input("Select an option: ")
 
         if choice == '1':
@@ -30,7 +32,7 @@ def customer_menu():
         elif choice == '2':
             customers = Customer.get_all()
             for c in customers:
-                print(c)
+                print(f"Name: {c['name']}, Email: {c['email']}, Phone: {c['phone_no']}")
 
         elif choice == '3':
             try:
@@ -69,18 +71,18 @@ def customer_menu():
 
         elif choice == '7':
             try:
-                customer_id = int(input("Enter your customer ID: "))
-                shipment_type = input("Enter shipment type (delivery/personal management): ")
-                shipment_date = datetime.utcnow()
+                customer_id = int(input("Customer ID: "))
+                shipment_type = input("Shipment Type (delivery/personal management): ").lower()
+                shipment_date = datetime.now()
                 shipment = Shipment(shipment_date=shipment_date, shipment_type=shipment_type, customer_id=customer_id)
                 shipment.save_shipment()
                 print("Shipment added!")
-            except ValueError:
-                print("Invalid ID.")
+            except Exception as e:
+                print("Error adding shipment:", e)
 
         elif choice == '8':
             try:
-                customer_id = int(input("Enter your customer ID: "))
+                customer_id = int(input("Customer ID: "))
                 shipments = Shipment.get_by_customer_id(customer_id)
                 for s in shipments:
                     print(s)
@@ -93,6 +95,14 @@ def customer_menu():
                 print(s)
 
         elif choice == '10':
+            try:
+                customer_id = int(input("Enter customer ID to delete: "))
+                Customer.delete_customer(customer_id)
+                print("Customer deleted.")
+            except ValueError:
+                print("Invalid ID.")
+
+        elif choice == '11':
             return
 
         else:
@@ -106,6 +116,7 @@ def product_owner_menu():
         print("3. View Products by Owner ID")
         print("4. Delete Product by ID")
         print("5. Back to Role Selection")
+
         choice = input("Select an option: ")
 
         if choice == '1':
@@ -135,8 +146,11 @@ def product_owner_menu():
         elif choice == '4':
             try:
                 product_id = int(input("Enter product ID to delete: "))
-                Product.delete(product_id)
-                print("Product deleted.")
+                product = Product.get_all()
+                if Product.delete(product_id):
+                    print("Product deleted.")
+                else:
+                    print("Product not found.")
             except ValueError:
                 print("Invalid ID.")
 
