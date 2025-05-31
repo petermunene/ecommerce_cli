@@ -11,7 +11,7 @@ class Product(Base):
     owner = relationship('ProductOwner', back_populates='products')
     orders = relationship('Order', back_populates='product',cascade='all,delete-orphan')
     def __init__(self,product_name,owner_id,id=None):
-        if isinstance (product_name,str) and (0<len(name)=<25):
+        if isinstance (product_name,str) and (0<len(name)<=25):
             self.id=id
             self.product_name=product_name
         else:
@@ -19,7 +19,7 @@ class Product(Base):
         if isinstance (owner_id,int):
             self.owner_id=owner_id
         else:
-            raise TypeError("owner id must be a string .")
+            raise TypeError("owner id must be a integer .")
     def save(self):
         session.add(self)
         session.commit()
@@ -37,4 +37,4 @@ class Product(Base):
     def delete(cls,id):
         product=session.query(cls).filter_by(id=id).first()
         session.delete(product)
-        session.delete(delete)
+        session.commit()

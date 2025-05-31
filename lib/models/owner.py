@@ -9,7 +9,7 @@ class ProductOwner(Base):
 
     products = relationship('Product', back_populates='owner', cascade='all,delete-orphan' )
     def __init__(self,name,id=None):
-        if isinstance (name,str) and (0<len(name)=<25):
+        if isinstance (name,str) and (0<len(name)<=25):
             self.name=name
         else:
             raise TypeError("name must be string between 0 and 25 characters")

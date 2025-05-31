@@ -13,12 +13,12 @@ class Order(Base):
     customer = relationship('Customer', back_populates='orders')
     product = relationship('Product', back_populates='orders')
     def __init__(self,product_id,customer_id,id=None):
-    if isinstance(product_id,int) and isinstance(customer_id,int):
-        self.product_id=product_id
-        self.customer_id=customer_id
-        self.order_date=datetime.utcnow()
-    else:
-        raise TypeError('customer id and product id must both be integers')
+        if isinstance(product_id,int) and isinstance(customer_id,int):
+            self.product_id=product_id
+            self.customer_id=customer_id
+            self.order_date=datetime.utcnow()
+        else:
+            raise TypeError('customer id and product id must both be integers')
     def save_order(self):
         session.add(self)
         session.commit()
