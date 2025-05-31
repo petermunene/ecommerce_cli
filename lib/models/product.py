@@ -11,9 +11,15 @@ class Product(Base):
     owner = relationship('ProductOwner', back_populates='products')
     orders = relationship('Order', back_populates='product',cascade='all,delete-orphan')
     def __init__(self,product_name,owner_id,id=None):
-        self.product_name=product_name
-        self.owner_id=owner_id
-        self.id=id
+        if isinstance (product_name,str) and (0<len(name)=<25):
+            self.id=id
+            self.product_name=product_name
+        else:
+            raise TypeError("product name must be string between 0 and 25 characters")
+        if isinstance (owner_id,int):
+            self.owner_id=owner_id
+        else:
+            raise TypeError("owner id must be a string .")
     def save(self):
         session.add(self)
         session.commit()

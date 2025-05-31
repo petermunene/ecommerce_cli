@@ -43,7 +43,7 @@ def customer_menu():
                 else:
                     print("Customer not found.")
             except ValueError:
-                print("Invalid ID.")
+                print("Invalid ID.Make sure id is a number")
 
         elif choice == '4':
             try:
@@ -53,7 +53,7 @@ def customer_menu():
                 order.save_order()
                 print("Order placed successfully!")
             except ValueError:
-                print("Invalid input.")
+                print("Invalid input.Make sure product_id and customer_id are both numbers")
 
         elif choice == '5':
             try:
@@ -146,7 +146,6 @@ def product_owner_menu():
         elif choice == '4':
             try:
                 product_id = int(input("Enter product ID to delete: "))
-                product = Product.get_all()
                 if Product.delete(product_id):
                     print("Product deleted.")
                 else:

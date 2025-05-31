@@ -10,12 +10,15 @@ class Shipment(Base):
     customer_id = Column(Integer, ForeignKey('customers.id',ondelete='CASCADE'))
 
     customer = relationship('Customer', back_populates='shipments')
-
+    shipment_options=[delivery,personal management]
     def __init__(self,shipment_date,shipment_type,customer_id,id=None):
+    if shipment_type in shipment_options and isinstance(customer_id,int):
         self.shipment_date=shipment_date
         self.shipment_type=shipment_type
         self.customer_id=customer_id
         self.id=id
+    else:
+        raise TypeError("Invalid shipment type or customer_id")
     def save_shipment(self):
         session.add(self)
         session.commit()

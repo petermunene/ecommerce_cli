@@ -14,10 +14,13 @@ class Customer(Base):
     shipments = relationship('Shipment', back_populates='customer',cascade='all,delete-orphan')
 
     def __init__(self, name, email, phone_no, id=None):
+    if isinstance(name,str) and "@" in email :
         self.name = name
         self.email = email
         self.phone_no = phone_no
         self.id = id
+    else:
+        raise TypeError("incorrect name or email")
 
     def save_customer(self):
         session.add(self)
@@ -47,4 +50,4 @@ class Customer(Base):
     def find_customer_by_name(cls, name):
         return session.query(cls).filter_by(name=name).first()
 
-        
+
