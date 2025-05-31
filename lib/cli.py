@@ -43,7 +43,7 @@ def customer_menu():
                 else:
                     print("Customer not found.")
             except ValueError:
-                print("Invalid ID.Make sure id is a number")
+                print("Invalid ID. Make sure ID is a number.")
 
         elif choice == '4':
             try:
@@ -53,7 +53,7 @@ def customer_menu():
                 order.save_order()
                 print("Order placed successfully!")
             except ValueError:
-                print("Invalid input.Make sure product_id and customer_id are both numbers")
+                print("Invalid input. Make sure product ID and customer ID are both numbers.")
 
         elif choice == '5':
             try:
@@ -115,7 +115,11 @@ def product_owner_menu():
         print("2. View All Products")
         print("3. View Products by Owner ID")
         print("4. Delete Product by ID")
-        print("5. Back to Role Selection")
+        print("5. Add Product Owner")
+        print("6. View All Product Owners")
+        print("7. View Product Owner by ID")
+        print("8. Delete Product Owner by ID")
+        print("9. Back to Role Selection")
 
         choice = input("Select an option: ")
 
@@ -154,6 +158,39 @@ def product_owner_menu():
                 print("Invalid ID.")
 
         elif choice == '5':
+            name = input("Enter owner name: ")
+            try:
+                owner = ProductOwner(name=name)
+                owner.save_owner()
+                print("Product owner added.")
+            except Exception as e:
+                print("Error adding owner:", e)
+
+        elif choice == '6':
+            owners = ProductOwner.get_all()
+            for o in owners:
+                print(o)
+
+        elif choice == '7':
+            try:
+                id = int(input("Enter owner ID: "))
+                owner = ProductOwner.get_by_id(id)
+                if owner:
+                    print(owner)
+                else:
+                    print("Owner not found.")
+            except ValueError:
+                print("Invalid ID.")
+
+        elif choice == '8':
+            try:
+                id = int(input("Enter owner ID to delete: "))
+                ProductOwner.delete_owner(id)
+                print("Product owner deleted.")
+            except ValueError:
+                print("Invalid ID.")
+
+        elif choice == '9':
             return
 
         else:

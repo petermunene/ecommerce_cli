@@ -13,7 +13,7 @@ class Shipment(Base):
     
     shipment_options=['delivery','personal management']
     def __init__(self,shipment_date,shipment_type,customer_id,id=None):
-        if shipment_type in shipment_options and isinstance(customer_id,int):
+        if shipment_type in Shipment.shipment_options and isinstance(customer_id,int):
             self.shipment_date=shipment_date
             self.shipment_type=shipment_type
             self.customer_id=customer_id
