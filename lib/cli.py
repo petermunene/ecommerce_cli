@@ -6,18 +6,18 @@ from datetime import datetime
 
 def customer_menu():
     while True:
-        print("\n=== Customer Menu ===")
-        print("1. Add Customer")
-        print("2. View All Customers")
-        print("3. Find Customer by ID")
-        print("4. Place Order")
-        print("5. View Orders by Customer ID")
-        print("6. View All Orders")
-        print("7. Add Shipment")
-        print("8. View Shipments by Customer ID")
-        print("9. View All Shipments")
-        print("10. Delete Customer by ID")
-        print("11. Back to Role Selection")
+        print("\n=== 🧑‍💼 Customer Menu ===")
+        print("1. ➕ Add Customer")
+        print("2. 📋 View All Customers")
+        print("3. 🔍 Find Customer by ID")
+        print("4. 🛒 Place Order")
+        print("5. 🧾 View Orders by Customer ID")
+        print("6. 📦 View All Orders")
+        print("7. 🚚 Add Shipment")
+        print("8. 📨 View Shipments by Customer ID")
+        print("9. 🗃️ View All Shipments")
+        print("10. ❌ Delete Customer by ID")
+        print("11. 🔙 Back to Role Selection")
 
         choice = input("Select an option: ")
 
@@ -110,16 +110,16 @@ def customer_menu():
 
 def product_owner_menu():
     while True:
-        print("\n=== Product Owner Menu ===")
-        print("1. Add Product")
-        print("2. View All Products")
-        print("3. View Products by Owner ID")
-        print("4. Delete Product by ID")
-        print("5. Add Product Owner")
-        print("6. View All Product Owners")
-        print("7. View Product Owner by ID")
-        print("8. Delete Product Owner by ID")
-        print("9. Back to Role Selection")
+        print("\n=== 🧑‍🔧 Product Owner Menu ===")
+        print("1. ➕ Add Product")
+        print("2. 📦 View All Products")
+        print("3. 🆔 View Products by Owner ID")
+        print("4. ❌ Delete Product by ID")
+        print("5. 👤 Add Product Owner")
+        print("6. 📋 View All Product Owners")
+        print("7. 🔍 View Product Owner by ID")
+        print("8. 🗑️ Delete Product Owner by ID")
+        print("9. 🔙 Back to Role Selection")
 
         choice = input("Select an option: ")
 
