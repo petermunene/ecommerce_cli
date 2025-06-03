@@ -22,12 +22,15 @@ def customer_menu():
         choice = input("Select an option: ")
 
         if choice == '1':
-            name = input("Name: ")
-            email = input("Email: ")
-            phone = input("Phone number: ")
-            customer = Customer(name=name, email=email, phone_no=phone)
-            customer.save_customer()
-            print("Customer added!")
+            try:
+                name = input("Name: ")
+                email = input("Email: ")
+                phone = input("Phone number: ")
+                customer = Customer(name=name, email=email, phone_no=phone)
+                customer.save_customer()
+                print("Customer added!")
+            except ValueError:
+                print("Invalid name or email")
 
         elif choice == '2':
             customers = Customer.get_all()
@@ -131,7 +134,7 @@ def product_owner_menu():
                 product.save()
                 print("Product added.")
             except ValueError:
-                print("Invalid ID.")
+                print(" product name must be string between 0 and 25 characters and id must be an integer")
 
         elif choice == '2':
             products = Product.get_all()

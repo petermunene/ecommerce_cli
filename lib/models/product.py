@@ -11,11 +11,11 @@ class Product(Base):
     owner = relationship('ProductOwner', back_populates='products')
     orders = relationship('Order', back_populates='product',cascade='all,delete-orphan')
     def __init__(self,product_name,owner_id,id=None):
-        if isinstance (product_name,str) and (0<len(product_name)<=25):
+        if all(part.isalpha() for part in product_name.split()) and (0<len(product_name)<=25):
             self.id=id
             self.product_name=product_name
         else:
-            raise TypeError("product name must be string between 0 and 25 characters")
+            raise ValueError("Product name must contain only alphabetic characters.")
         if isinstance (owner_id,int):
             self.owner_id=owner_id
         else:

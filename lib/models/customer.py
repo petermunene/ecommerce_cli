@@ -14,13 +14,13 @@ class Customer(Base):
     shipments = relationship('Shipment', back_populates='customer',cascade='all,delete-orphan')
 
     def __init__(self, name, email, phone_no, id=None):
-        if isinstance(name,str) and "@" in email :
+        if all(part.isalpha() for part in name.split()) and "@" in email and "." in email:
             self.name = name
             self.email = email
             self.phone_no = phone_no
             self.id = id
         else:
-            raise TypeError("incorrect name or email")
+            raise ValueError("incorrect name or email")
 
     def save_customer(self):
         session.add(self)
