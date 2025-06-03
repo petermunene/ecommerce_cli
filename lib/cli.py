@@ -17,7 +17,8 @@ def customer_menu():
         print("8. 📨 View Shipments by Customer ID")
         print("9. 🗃️ View All Shipments")
         print("10. ❌ Delete Customer by ID")
-        print("11. 🔙 Back to Role Selection")
+        print("11. 📦 View All Products")
+        print("12. 🔙 Back to Role Selection")
 
         choice = input("Select an option: ")
 
@@ -106,6 +107,11 @@ def customer_menu():
                 print("Invalid ID.")
 
         elif choice == '11':
+            products = Product.get_all()
+            for p in products:
+                print(f"ID: {p.id}, Name: {p.product_name}, Owner ID: {p.owner_id}")
+
+        elif choice == '12':
             return
 
         else:
@@ -212,7 +218,7 @@ def main():
         elif role == '2':
             product_owner_menu()
         elif role == '3':
-            print("Goodbye!")
+            print("Enda sasa uuze uji!")
             sys.exit()
         else:
             print("Invalid selection. Please choose again.")
